@@ -28,13 +28,17 @@ RUN apt-get -y update           && \
 
 RUN apt-get install --only-upgrade bash
 
-WORKDIR /usr/local/src
-RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git
-WORKDIR /usr/local/src/s3fs-fuse
-RUN ./autogen.sh
-RUN ./configure
-RUN make
-RUN make install
+# WORKDIR /usr/local/src
+# RUN git clone https://github.com/s3fs-fuse/s3fs-fuse.git
+# WORKDIR /usr/local/src/s3fs-fuse
+# RUN ./autogen.sh
+# RUN ./configure
+# RUN make
+# RUN make install
+
+# install mountpoint for s3 instead
+RUN wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.deb
+RUN apt-get install -y ./mount-s3.deb
 
 # Install AWS CLI
 
